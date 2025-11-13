@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="styles/student.css"/>
+</head>
+<body>
+  <header>
+    <a href="about.html"><img src="logo.png" alt="logo"></a>
+    <h2 id="student-greeting">Hi, student!</h2>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
+
+  <div class="student-portal">
+    <div class="sidebar">
+      <button onclick="showSection('assignments')">Assignments</button>
+      <button onclick="showSection('materials')">Materials</button>
+      <button onclick="showSection('quizzes')">Quizzes</button>
+      <button onclick="showSection('projects')">Projects</button>
+      <button onclick="showSection('courseDetails')">My Courses</button>
+      <button onclick="showSection('availableCourses')">Available Courses</button>
+      <button onclick="showSection('attendance')">Attendance</button>
+      <button onclick="showSection('leaderboard')">Leaderboard</button>
+      <button onclick="showSection('profile')">My Profile</button>
+      <button onclick="showSection('trainerContact')">Trainer Contact</button>
+      <button onclick="showSection('announcements')">Announcements</button>
+      <button onclick="showSection('help')">Get Help</button>
+    </div>
+
+   <section id="assignments" class="section" style="display: none;">
+  <h2>Assignments</h2>
+  <p>Here you can view and submit your assignments.</p>
+  <ul id="assignmentList">
+  </ul>
+</section>
+
+
+
+<section id="materials" class="section" style="display: none;">
+  <h2>Materials</h2>
+  <p>Access course materials here.</p>
+  <ul id="materialsList"></ul>
+</section>
+
+
+<section id="quizzes" class="section" style="display: none;">
+  <h2>Available Quizzes</h2>
+  <ul id="quizList"></ul>
+</section>
+
+<section id="takeQuizSection" class="section" style="display: none;">
+  <h3>Take Quiz</h3>
+  <form id="takeQuizForm"></form>
+  <button id="submitQuizBtn">Submit</button>
+  <p id="quizResult"></p>
+</section>
+
+
+
+
+<section id="projects" class="section" style="display: none;">
+  <h2>Projects</h2>
+  <p>Collaborate and showcase your skills through projects.</p>
+  <ul>
+    <li><strong>Project 1:</strong> Build a Personal Portfolio Website - Due: July 5, 2025</li>
+    <li><strong>Project 2:</strong> Group App Development - Due: August 15, 2025</li>
+  </ul>
+  <button onclick="alert('Opening project dashboard')">Go to Projects Dashboard</button>
+</section>
+
+<section id="announcements" class="section" style="display: none;">
+  <h2>Announcements</h2>
+  <ul>
+    <li><strong>May 30, 2025:</strong> Midterm exams postponed to June 20.</li>
+    <li><strong>June 5, 2025:</strong> New lab timings released for summer semester.</li>
+    <li><strong>June 15, 2025:</strong> Guest lecture on AI and Machine Learning scheduled for June 25.</li>
+  </ul>
+</section>
+
+
+
+      <section id="courseDetails" class="section" style="display: none;">
+        <h2>My Courses</h2>
+        <p>Overview of your enrolled courses.</p>
+      </section>
+
+      <section id="availableCourses" class="section" style="display: none;">
+  <h2>Available Courses</h2>
+  <p class="subtitle">Explore and enroll in top-rated programs to boost your skills.</p>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <h3>Full Stack Web Development</h3>
+      <p>Learn front-end, back-end, databases, and APIs to become a professional web developer.</p>
+      <span class="tag">Duration: 6 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>Data Science & Machine Learning</h3>
+      <p>Master Python, data analysis, machine learning, and real-world ML projects.</p>
+      <span class="tag">Duration: 5 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>UI/UX Design</h3>
+      <p>Design beautiful, user-centered digital experiences using Figma, XD, and prototyping tools.</p>
+      <span class="tag">Duration: 3 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>DevOps & Cloud Engineering</h3>
+      <p>Deploy scalable apps using AWS, Docker, Kubernetes, CI/CD pipelines and monitoring tools.</p>
+      <span class="tag">Duration: 4 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>Cybersecurity Fundamentals</h3>
+      <p>Understand ethical hacking, network security, risk management, and defense techniques.</p>
+      <span class="tag">Duration: 3.5 months</span>
+    </div>
+  </div>
+</section>
+
+
+<section id="attendance" class="section" style="display: none;">
+  <h3>Attendance Records</h3>
+
+  <div class="attendance-container">
+    <table id="attendanceTable">
+      <thead>
+    <tr>
+      <th>Date</th>
+      <th>Status</th>
+      <th>marked_by</th>
+    </tr>
+  </thead>
+      <tbody id="attendanceTableBody">
+        <!-- JS will fill rows here, one per field -->
+      </tbody>
+    </table>
+    
+
+    <div id="attendanceCircle" class="circle">--%</div>
+  </div>
+</section>
+
+
+
+      <section id="leaderboard" class="section" style="display: none;">
+        <h2>Leaderboard</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardTableBody"></tbody>
+        </table>
+      </section>
+
+      <div id="profile" class="form-section" style="display: none;">
+        <h3>My Profile</h3>
+        <div class="profile-info">
+          <p><strong>Name:</strong> <span id="student-name">Student Name</span></p>
+          <p><strong>Email:</strong> <span id="student-email">student@example.com</span></p>
+          <p><strong>Course:</strong> <span id="student-course">FSN</span></p>
+          <p><strong>College:</strong> <span id="student-college">VIT</span></p>
+          <p><strong>Last Login:</strong> <span id="student-last-login">May 17, 2025</span></p>
+        </div>
+
+        <div class="profile-actions">
+          <button onclick="editProfile()">Edit Profile</button>
+          <button onclick="changePassword()">Change Password</button>
+        </div>
+
+        <div id="editProfile" class="form-section" style="display: none;">
+          <h3>Edit Profile</h3>
+          <form id="editProfileForm">
+            <label for="">Name:</label>
+            <input type="text" id="editProfileName" placeholder="Name" required />
+            <label for="">Email:</label>
+            <input type="email" id="editProfileEmail" placeholder="Email" required />
+            <button type="submit">Save Changes</button>
+            <button type="button" id="cancelBtn1">Cancel</button>
+          </form>
+        </div>
+
+        <div id="changePassword" class="form-section" style="display: none;">
+          <h3>Change Password</h3>
+          <form id="changePasswordForm">
+            <input type="password" id="currentPassword" placeholder="Current Password" required />
+            <input type="password" id="newPassword" placeholder="New Password" required />
+            <input type="password" id="confirmPassword" placeholder="Confirm New Password" required />
+            <button type="submit">Change Password</button>
+            <button type="button" id="cancelBtn2">Cancel</button>
+          </form>
+        </div>
+      </div>
+
+      <section id="trainerContact" class="section" style="display: none;">
+        <h2>Trainer Contact</h2>
+        <p>Contact your trainer here.</p>
+      </section>
+
+      <section id="help" class="section" style="display: none;">
+  <h2>Help & Support</h2>
+  
+  <form id="helpForm" style="margin-bottom: 2em; max-width: 500px;">
+    <label for="userEmail">Your Email:</label><br />
+    <input type="email" id="userEmail" name="userEmail" placeholder="Enter your email" required
+           style="width: 100%; padding: 8px; margin-bottom: 1em; border-radius: 5px; border: 1px solid #ccc;" />
+    
+    <label for="issueReason">Issue / Reason:</label><br />
+    <textarea id="issueReason" name="issueReason" rows="4" placeholder="Describe your issue" required
+              style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;"></textarea><br />
+    
+    <button type="submit" style="padding: 10px 20px; background-color: #1abc9c; border: none; color: white; border-radius: 6px; cursor: pointer;">
+      Submit Issue
+    </button>
+  </form>
+  
+  <h3>Frequently Asked Questions</h3>
+  <div id="faq">
+    <details>
+      <summary>How do I reset my password?</summary>
+      <p>You can reset your password by going to the 'Change Password' section under 'My Profile'.</p>
+    </details>
+    <details>
+      <summary>How do I submit assignments?</summary>
+      <p>Navigate to the 'Assignments' section, select the relevant assignment, and upload your files.</p>
+    </details>
+    <details>
+      <summary>Can I retake quizzes?</summary>
+      <p>Retake policies vary by course. Check with your trainer or the quiz instructions.</p>
+    </details>
+    <details>
+      <summary>Who do I contact for course materials?</summary>
+      <p>You can contact your trainer through the 'Trainer Contact' section.</p>
+    </details>
+  </div>
+</section>
+
+    </div>
+  </div>
+
+  <script src="student.js"></script>
+</body>
+</html>

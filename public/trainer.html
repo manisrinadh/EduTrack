@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trainer Portal</title>
+  <link rel="stylesheet" href="styles/trainer.css" />
+</head>
+<body>
+  <header>
+    <a href="about.html"><img src="logo.png" alt="logo"></a>
+    <h2 id="trainer-greeting">Hi, Trainer!</h2>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </header>
+
+  <div class="trainer-portal">
+    <div class="sidebar">
+      <button onclick="showSection('studentList')">Student List</button>
+      <button onclick="showSection('attendance')">Student Attendance</button>
+      <button onclick="showSection('leaderboard')">Leaderboard</button>
+      <button onclick="showSection('assignment')">Assignments</button>
+      <button onclick="showSection('material')">Materials</button>
+      <button onclick="showSection('quiz')">Quiz</button>
+      <button onclick="showSection('profile')">My Profile</button>
+    </div>
+
+    <div class="content-area">
+      <div id="studentList" class="section" style="display: none;">
+        <h2>Student List</h2>
+        <button class="add-btn" onclick="showSection('addStudentForm')">Add Student</button>
+        <table id="studentTable">
+          <thead>
+            <tr>
+              <th>SID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Attendance %</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="student-table-body"></tbody>
+        </table>
+      </div>
+
+      <div id="addStudentForm" class="section" style="display: none;">
+        <h3>Add New Student</h3>
+        <button type="button" class="back-btn" onclick="showSection('studentList')">&#8592; Back</button>
+        <form id="studentForm">
+          <label for="studentName">Name:</label>
+          <input type="text" id="studentName" placeholder="StudentName" />
+
+          <label for="studentEmail">Email:</label>
+          <input type="email" id="studentEmail" placeholder="Email" required />
+
+          <label for="studentCollege">College:</label>
+          <select id="studentCollege" required>
+            <option value="">Select College</option>
+            <option value="VIT">VIT</option>
+            <option value="GNI">GNI</option>
+            <option value="SVECW">SVECW</option>
+            <option value="SRKR">SRKR</option>
+            <option value="VRSEC">VRSEC</option>
+            <option value="ANITS">ANITS</option>
+            <option value="GVPE">GVPE</option>
+            <option value="RVRJC">RVRJC</option>
+          </select>
+
+          <label for="studentCourse">Course:</label>
+          <input type="text" id="studentCourse" placeholder="studentcourse" />
+
+          <label for="studentPassword">Password:</label>
+          <input type="password" id="studentPassword" placeholder="Password" />
+
+          <button type="submit">Add Student</button>
+        </form>
+      </div>
+
+      <div id="attendance" class="form-section" style="display: none;">
+  <h3>Student Attendance</h3>
+  <form id="attendanceForm">
+    <select id="studentSelect" required>
+      <option value="">Select Student</option>
+    </select>
+    <input type="date" id="attendanceDate" required />
+    <select id="attendanceStatus" required>
+      <option value="present">Present</option>
+      <option value="absent">Absent</option>
+    </select>
+    <button type="submit">Mark Attendance</button>
+  </form>
+  <div class="success-message" id="attendanceMessage"></div>
+
+  <h4>Attendance Report</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>College</th>
+        <th>Attendance</th>
+      </tr>
+    </thead>
+    <tbody id="attendanceTableBody"></tbody>
+  </table>
+</div>
+
+
+      <div id="assignment" class="form-section" style="display: none;">
+        <h3>Add Assignment</h3>
+        <form id="assignmentForm"action="/api/assignments" method="POST" enctype="multipart/form-data">
+          <label>Assignment_Name:</label>
+  <input type="text" name="assignment_name" placeholder="Assignment Name" required>
+  <label>Due_Date:</label>
+  <input type="date" name="due_date" required>
+  <input type="file" name="pdf" accept="application/pdf" >
+  <button type="submit">Upload Assignment</button>
+</form>
+
+        <div id="uploadStatus" class="success-message"></div>
+
+      </div>
+
+      <div id="material" class="form-section" style="display: none;">
+  <h3>Add Material</h3>
+  <form id="materialForm" enctype="multipart/form-data">
+  <input type="text" id="materialTitle" placeholder="Material Title" required />
+  <textarea id="materialDescription" placeholder="Material Description"></textarea>
+  <input type="file" id="materialFile" name="pdf" accept="application/pdf" required />
+  <button type="submit">Add Material</button>
+</form>
+<div id="materialSuccess" class="success-message"></div>
+
+</div>
+
+
+      <div id="quiz" class="form-section" style="display: none;">
+  <h3>Create Quiz</h3>
+
+  <form id="quizForm">
+    <!-- Quiz Title -->
+    <input type="text" id="quizTitle" placeholder="Quiz Title" required />
+
+    <!-- Add Questions Dynamically -->
+    <div id="questionsContainer">
+      <!-- Question blocks will be inserted by JS -->
+    </div>
+
+    <!-- Add More Questions -->
+    <button type="button" onclick="addQuestion()">➕ Add Another Question</button>
+
+    <!-- Submit Quiz -->
+    <button type="submit">📤 Submit Quiz</button>
+  </form>
+
+  <div class="success-message" id="quizSuccess"></div>
+</div>
+
+
+      <section id="leaderboard" class="section" style="display: none;">
+        <h2>Leaderboard</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardTableBody"></tbody>
+        </table>
+      </section>
+
+      <div id="profile" class="form-section" style="display: none;">
+        <h3>My Profile</h3>
+        <div class="profile-info">
+  <p><strong>Name:</strong> <span id="trainer-name">Trainer Name</span></p>
+  <p><strong>Email:</strong> <span id="trainer-email">trainer@example.com</span></p>
+  <p><strong>Course:</strong> <span id="trainer-course">FSN</span></p>
+  <p><strong>Last Login:</strong> <span id="trainer-last-login">May 17, 2025</span></p>
+</div>
+
+        <div class="profile-actions">
+          <button onclick="editProfile()">Edit Profile</button>
+          <button onclick="changePassword()">Change Password</button>
+        </div>
+        
+<div id="editProfile" class="form-section" style="display: none;">
+  <h3>Edit Profile</h3>
+  <form id="editProfileForm">
+    <input type="text" id="editProfileName" placeholder="Name" required />
+    <input type="email" id="editProfileEmail" placeholder="Email" required />
+    <button type="submit">Save Changes</button>
+    <button type="button" id="cancelBtn1">Cancel</button>
+  </form>
+</div>
+
+
+<div id="changePassword" class="form-section" style="display: none;">
+  <h3>Change Password</h3>
+  <form id="changePasswordForm">
+    <input type="password" id="currentPassword" placeholder="Current Password" required />
+    <input type="password" id="newPassword" placeholder="New Password" required />
+    <input type="password" id="confirmPassword" placeholder="Confirm New Password" required />
+    <button type="submit">Change Password</button>
+    <button type="button" id="cancelBtn2">Cancel</button>
+  </form>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="trainer.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Portal</title>
+  <link rel="stylesheet" href="styles/admin.css" />
+</head>
+<body>
+  <header>
+      <a href="about.html"><img src="logo.png" alt="logo"></a>
+    </div>
+    <h2>Hi, Admin!</h2>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+  <div class="admin-portal">
+    <div class="sidebar">
+  <button onclick="showSection('studentList')">Student List</button>
+  <button onclick="showSection('trainerList')">Trainer List</button>
+  <button onclick="showSection('availableCourses')">Available Courses</button>
+  <button onclick="showSection('courseList')">Course List</button>
+  <button onclick="showSection('collegeList')">College List</button>
+  <button onclick="showSection('leaderboard')">Leaderboard</button>
+  <button onclick="showSection('myProfile')">My Profile</button>
+</div>
+    <div class="main-content" id="main-content">
+
+      <div id="trainerList" class="section" style="display: none;">
+        <h2>Trainer List</h2>
+        <button class="add-btn" onclick="showAddTrainerForm()">Add Trainer</button>
+        <table id="trainerTable">
+          <thead>
+            <tr>
+              <th>TID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Course</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="trainer-table-body"></tbody>
+        </table>
+      </div>
+
+  
+      <div id="studentList" class="section" style="display: none;">
+        <h2>Student List</h2>
+        <button class="add-btn" onclick="showAddStudentForm()">Add Student</button>
+        <table id="studentTable">
+          <thead>
+            <tr>
+              <th>SID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Attendance%</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="student-table-body"></tbody>
+        </table>
+      </div>
+
+   
+      <div id="addStudentForm" class="section" style="display: none;">
+        <h3>Add New Student</h3>
+        <button type="button" class="back-btn" onclick="showSection('studentList')">
+          &#8592; Back
+        </button>
+        <form id="studentForm">
+          <label for="studentName">Name:</label>
+          <input type="text" id="studentName" placeholder="Enter student's full name" required />
+
+          <label for="studentEmail">Email:</label>
+          <input type="email" id="studentEmail" placeholder="Enter student's email address" required />
+
+          <label for="studentCollege">College:</label>
+          <select id="studentCollege" required>
+            <option value="">Select College</option>
+            <option value="VIT">VIT</option>
+            <option value="GNI">GNI</option>
+            <option value="SVECW">SVECW</option>
+            <option value="SRKR">SRKR</option>
+            <option value="VRSEC">VRSEC</option>
+            <option value="ANITS">ANITS</option>
+            <option value="GVPE">GVPE</option>
+            <option value="RVRJC">RVRJC</option>
+          </select>
+
+          <label for="studentCourse">Course:</label>
+          <select id="studentCourse" required>
+            <option value="">Select Course</option>
+            <option value="FSN">FSN</option>
+            <option value="AI-ML">AI-ML</option>
+            <option value="AI-DS">AI-DS</option>
+            <option value="CS">CS</option>
+            <option value="GEN-AI">GEN-AI</option>
+          </select>
+
+          <label for="studentPassword">Password:</label>
+          <input type="password" id="studentPassword" placeholder="Default is same as name" required />
+
+          <button type="submit">Add Student</button>
+        </form>
+      </div>
+
+
+      <div id="addTrainerForm" class="section" style="display: none;">
+        <h3>Add New Trainer</h3>
+        <button type="button" class="back-btn" onclick="showSection('trainerList')">
+          &#8592; Back
+        </button>
+        <form id="trainerForm">
+          <label for="trainerName">Name:</label>
+          <input type="text" id="trainerName" placeholder="Enter trainer's full name" required />
+
+          <label for="trainerEmail">Email:</label>
+          <input type="email" id="trainerEmail" placeholder="Enter trainer's email address" required />
+
+          <label for="trainerCourse">Course:</label>
+          <select id="trainerCourse" required>
+            <option value="">Select Course</option>
+            <option value="FSN">FSN</option>
+            <option value="AI-ML">AI-ML</option>
+            <option value="AI-DS">AI-DS</option>
+            <option value="CS">CS</option>
+            <option value="GEN-AI">GEN-AI</option>
+          </select>
+
+          <label for="trainerPassword">Password:</label>
+          <input type="password" id="trainerPassword" placeholder="Default is same as name" required />
+
+          <button type="submit">Add Trainer</button>
+        </form>
+      </div>
+      <section id="availableCourses" class="section" style="display: none;">
+  <h2>Available Courses</h2>
+  <p class="subtitle">Explore and enroll in top-rated programs to boost your skills.</p>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <h3>Full Stack Web Development</h3>
+      <p>Learn front-end, back-end, databases, and APIs to become a professional web developer.</p>
+      <span class="tag">Duration: 6 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>Data Science & Machine Learning</h3>
+      <p>Master Python, data analysis, machine learning, and real-world ML projects.</p>
+      <span class="tag">Duration: 5 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>UI/UX Design</h3>
+      <p>Design beautiful, user-centered digital experiences using Figma, XD, and prototyping tools.</p>
+      <span class="tag">Duration: 3 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>DevOps & Cloud Engineering</h3>
+      <p>Deploy scalable apps using AWS, Docker, Kubernetes, CI/CD pipelines and monitoring tools.</p>
+      <span class="tag">Duration: 4 months</span>
+    </div>
+
+    <div class="course-card">
+      <h3>Cybersecurity Fundamentals</h3>
+      <p>Understand ethical hacking, network security, risk management, and defense techniques.</p>
+      <span class="tag">Duration: 3.5 months</span>
+    </div>
+  </div>
+</section>
+   
+      <div id="collegeList" class="section" style="display: none;">
+        <h2>College List</h2>
+        <table id="collegeTable">
+          <thead>
+            <tr>
+              <th>College Name</th>
+              <th>Number of Students</th>
+            </tr>
+          </thead>
+          <tbody id="college-table-body" data-colleges="VIT,GNI,SVECW,SRKR,VRSEC,ANITS,GVPE,RVRJC"></tbody>
+        </table>
+      </div>
+
+    
+      <div id="courseList" class="section" style="display: none;">
+        <h2>Course List</h2>
+        <table id="courseTable">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Number of Students</th>
+            </tr>
+          </thead>
+          <tbody id="course-table-body" data-courses="AI-ML,CS,GEN-AI,FSN,AI-DS"></tbody>
+        </table>
+      </div>
+
+      <section id="leaderboard" class="section" style="display: none;">
+        <h2>Leaderboard</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-table-body">
+            
+          </tbody>
+        </table>
+      </section>
+
+   
+      <div id="myProfile" class="section" style="display: none;">
+        <h2>My Profile</h2>
+        <div class="profile-info">
+          <p><strong>Name:</strong> Admin</p>
+          <p><strong>Email:</strong> admin@gradious.com</p>
+          <p><strong>Role:</strong> Administrator</p>
+          <p><strong>Last Login:</strong> July 19, 2025</p>
+        </div>
+        <div class="profile-actions">
+          <button onclick="editProfile()">Edit Profile</button>
+          <button onclick="changePassword()">Change Password</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

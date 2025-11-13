@@ -1,0 +1,114 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.greeting h1 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  background: #ecf0f1;
+  padding: 15px 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+  transition: 0.3s ease;
+}
+
+.greeting h1:hover {
+  background: #d6e4ea;
+  transform: scale(1.02);
+}
+
+.login-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.login-box {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #34495e;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+
+form input,
+form select {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+form button:hover {
+  background-color: #2980b9;
+}
+
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
