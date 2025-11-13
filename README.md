@@ -1,3 +1,8 @@
+EduTrack – Digital Educational Management Platform
+
+EduTrack is a web-based educational management platform designed to streamline academic workflows for students, instructors, and administrators. The platform enables seamless delivery of educational content, automated assignment submissions, efficient grading, and comprehensive attendance tracking.
+
+🚀 Features
 🔹 Digital Assignment Workflow
 
 Automated assignment submission system
